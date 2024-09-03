@@ -3,9 +3,9 @@
 
 ## Overview
 
-This plugin allows seamless integration between **Discovery**, a powerfull tool distribute by [SenX](https://senx.io), and **Highcharts**, a popular JavaScript charting library. With this plugin, users can visualize data with Discovery dashboard directly in Highcharts, enabling rich and interactive data visualization capabilities.
+This plugin allows seamless integration between **Discovery**, a powerful tool distributed by [SenX](https://senx.io), and **Highcharts**, a popular JavaScript charting library. With this plugin, users can visualize data from Discovery dashboards directly in Highcharts, enabling rich and interactive data visualization capabilities.
 
-⚠️ **Warning:** If you want to use this plugin for commercial use, you need to buy a license [here](https://shop.highcharts.com/)
+⚠️ **Warning:**  If you want to use this plugin for commercial purposes, you need to purchase a license [here](https://shop.highcharts.com/)
 
 
 ## Table of Contents
@@ -39,12 +39,12 @@ import "@_kwh50/discovery-highcharts";
 
 ## Usage
 
-To implement an Highcharts chart inside a discovery dashboard you to specify the type of the tile :
+To implement a Highcharts chart inside a Discovery dashboard, you need to specify the type of the tile :
 ```mc2
 'type' 'HC'
 ```
 
-and then you can pass your Highcharts chart definition in the options field :
+Then, you can pass your Highcharts chart definition in the options field. :
 
 - HTML
 ```html
@@ -54,7 +54,7 @@ and then you can pass your Highcharts chart definition in the options field :
 <script>
     // Set HCOptions which correspond to Highcharts options
     document.getElementById('dash').setAttribute('options', JSON.stringify({
-        HCOptions: //Your Highcharts chart definition here
+        HCParams: //Your Highcharts chart definition here
     }));
     </script>
 ```
