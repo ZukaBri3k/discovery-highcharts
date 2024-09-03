@@ -21,7 +21,7 @@ This plugin allows seamless integration between **Discovery**, a powerfull tool 
 To install the plugin, run this command in your project:
 
    ```bash
-   npm i @_kwh50/discovery-highcharts
+   npm install @_kwh50/discovery-highcharts highcharts
    ```
 ## Getting Started
 
@@ -70,7 +70,7 @@ and then you can pass your Highcharts chart definition in the options field :
             'x' 0 'y' 0 'w' 12 'h' 3
             'type' 'HC'
             'options' {
-                'HCOptions' {Your Highcharts chart definition here}
+                'HCParams' `${Your Highcharts chart definition here}`
             }
             'macro' <%
                 1 4 <% DROP 
@@ -187,7 +187,102 @@ Here you can see an exemple in pure HTML and in React :
 
 - React
 
-comming soon...
+```tsx
+import React from 'react';
+import "@senx/discovery-widgets/dist/discovery/discovery.esm.js";
+import "@_kwh50/discovery-highcharts";
+import "highcharts/highstock";
+
+//declare the html tag discovery-dashboard
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            "discovery-dashboard": any;
+        }
+    }
+}
+
+function App() {
+
+    return (
+        <div className="App">
+            <discovery-dashboard
+                url="https://warpcloud.senx.io/api/v0/exec"
+                dashboard-title="Discovery - Highcharts"
+            >
+                {`{
+                    'title' 'Discovery - Highcharts'
+                    'description' 'Discovery dashboard using Highcharts'
+                    'tiles' [
+                        {
+                            'title' 'Highcharts graph'
+                            'x' 0 'y' 0 'w' 12 'h' 3
+                            'type' 'HC'
+                            'options' {
+                                'HCParams' '${JSON.stringify({
+                                    chart: {
+                                        type: "area",
+                                        animation: false,
+                                    },
+                                    legend: {
+                                        enabled: true,
+                                    },
+                                    rangeSelector: {
+                                        enabled: false,
+                                    },
+                                    xAxis: {
+                                        type: "datetime",
+                                        title: {
+                                            text: "Time",
+                                        },
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: "Value",
+                                        },
+                                    },
+                                    series: [
+                                        {
+                                            type: "line",
+                                            name: "My custom serie",
+                                        },
+                                        {
+                                            type: "line",
+                                            name: "My other custom serie",
+                                        },
+                                        {
+                                            type: "line",
+                                            name: "An other one",
+                                        },
+                                        {
+                                            type: "line",
+                                            name: "And again...",
+                                        },
+                                    ],
+                                } as Highcharts.Options)}'
+                            }
+                            'macro' <%
+                                1 4 <% DROP 
+                                NEWGTS 'g' STORE
+                                1 10 <% 
+                                'ts' STORE $g $ts RAND + STU * NOW + NaN NaN NaN RAND ADDVALUE DROP 
+                                %> FOR
+                                $g %> FOR STACKTOLIST 'data' STORE
+                                { 
+                                    'data' $data 
+                                }
+                            %>
+                        }
+                    ]
+                }`}
+            </discovery-dashboard>
+        </div>
+    );
+}
+
+export default App;
+
+```
 
 ## License
 
