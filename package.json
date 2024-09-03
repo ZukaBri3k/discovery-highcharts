@@ -1,6 +1,6 @@
 {
   "name": "@_kwh50/discovery-highcharts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": {
     "name": "Kyrill Dumerchat",
     "github": "https://github.com/ZukaBri3k",
@@ -20,7 +20,7 @@
       "import": "./dist/discovery-highcharts/discovery-highcharts.esm.js",
       "require": "./dist/discovery-highcharts/discovery-highcharts.cjs.js"
     },
-    "./my-component": {
+    "./HC": {
       "import": "./dist/components/discovery-highcharts.js",
       "types": "./dist/components/discovery-highcharts.d.ts"
     },
