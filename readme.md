@@ -29,7 +29,7 @@ To use this plugin you have to import it in your page
 
 - In HTML
 ```html
-    <script src="----------------link" />
+    <script src="https://unpkg.com/@_kwh50/discovery-highcharts@1.0.2/dist/discovery-highcharts/discovery-highcharts.esm.js" />
 ```
 
 - In Typescript
