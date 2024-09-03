@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <!-- Import Discovery -->
+    <script nomodule src="https://unpkg.com/@senx/discovery-widgets/dist/discovery/discovery.js"></script>
+    <script type="module" src="https://unpkg.com/@senx/discovery-widgets/dist/discovery/discovery.esm.js"></script>
+
+    <script type="module" src="/build/discovery-highcharts.esm.js"></script>
+    <script nomodule src="/build/discovery-highcharts.js"></script>
+  </head>
+  <body>
+    <discovery-dashboard url="https://warpcloud.senx.io/api/v0/exec" dashboard-title="Discovery - Highcharts" debug id="dash">
+{
+    'title' 'Discovery - Highcharts'
+    'description' 'Discovery dashboard using Highcharts'
+    'tiles' [
+        {
+            'title' 'Highcharts graph'
+            'x' 0 'y' 0 'w' 12 'h' 3
+            'type' 'HC'
+            'macro' <%
+                1 4 <% DROP 
+                NEWGTS 'g' STORE
+                1 10 <% 'ts' STORE $g $ts RAND + STU * NOW + NaN NaN NaN RAND ADDVALUE DROP %> FOR
+              $g %> FOR STACKTOLIST 'data' STORE
+              { 
+                'data' $data 
+              }
+            %>
+        }
+    ]
+}
+      </discovery-dashboard>
+      <script>
+        // Set HCOptions which correspond to Highcharts options
+        document.getElementById('dash').setAttribute('options', JSON.stringify({
+          HCOptions: {
+            chart: {
+              type: 'area',
+              animation: false,
+            },
+            legend: {
+              enabled: true,
+            },
+            rangeSelector: {
+              enabled: false
+            },
+            xAxis: {
+              type: 'datetime',
+              title: {
+                text: 'Time',
+              },
+            },
+            yAxis: {
+              title: {
+                text: 'Value',
+              },
+            },
+            series: [
+              {
+              type: 'line',
+              name: 'My custom serie',
+            },
+            {
+              type: 'line',
+              name: 'My other custom serie',
+            },
+            {
+              type: 'line',
+              name: 'An other one',
+            },
+            {
+              type: 'line',
+              name: 'And again...',
+            }
+          ],
+          },
+        })
+      );
+      </script>
+  </body>
+</html>
