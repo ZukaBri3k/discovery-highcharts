@@ -21,7 +21,7 @@ This plugin allows seamless integration between **Discovery**, a powerfull tool 
 To install the plugin, run this command in your project:
 
    ```bash
-   npm install discovery-highcharts
+   npm i @_kwh50/discovery-highcharts
    ```
 ## Getting Started
 
@@ -34,7 +34,7 @@ To use this plugin you have to import it in your page
 
 - In Typescript
 ```ts
-import "discovery-highcharts"
+import "@_kwh50/discovery-highcharts";
 ```
 
 ## Usage

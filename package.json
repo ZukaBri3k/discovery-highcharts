@@ -1,5 +1,5 @@
 {
-  "name": "discovery-highcharts",
+  "name": "@_kwh50/discovery-highcharts",
   "version": "1.0.0",
   "author": {
     "name": "Kyrill Dumerchat",
@@ -58,5 +58,8 @@
   "license": "LGPL-3.0-or-later",
   "dependencies": {
     "highcharts": "^11.4.8"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
