@@ -5,6 +5,9 @@
 
 This plugin allows seamless integration between **Discovery**, a powerfull tool distribute by [SenX](https://senx.io), and **Highcharts**, a popular JavaScript charting library. With this plugin, users can visualize data with Discovery dashboard directly in Highcharts, enabling rich and interactive data visualization capabilities.
 
+⚠️ **Warning:** If you want to use this plugin for commercial use, you need to buy a license [here](https://shop.highcharts.com/)
+
+
 ## Table of Contents
 
 - [Installation](#installation)
