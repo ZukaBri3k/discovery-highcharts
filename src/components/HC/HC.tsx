@@ -44,6 +44,7 @@ export class HC {
   updateRes(newValue: DataModel | string, oldValue: DataModel | string) {
     if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
       this.innerResult = GTSLib.getData(this.result);
+      console.log("Result updated", this.innerResult);
       setTimeout(() => this.drawChart()); // <- we will see this function later
     }
   }
@@ -59,6 +60,7 @@ export class HC {
       } else {
         this.innerOptions = { ...(this.options as HCParams) };
       }
+      console.log("Options updated", this.innerOptions);
       setTimeout(() => this.drawChart());
     }
   }
@@ -113,24 +115,37 @@ export class HC {
     let options = Utils.mergeDeep<HCParams>(this.innerOptions || ({} as HCParams), this.innerResult.globalParams) as HCParams;
     this.innerOptions = { ...options };
 
+    console.log("NPM qui bug");
+    console.log("Type of HCOptions", typeof this.innerOptions.HCOptions);
+    if(typeof this.innerOptions.HCOptions === 'string') {
+      console.log("Parsing HCOptions");
+      this.innerOptions.HCOptions = JSON.parse(this.innerOptions.HCOptions);
+    }
+
     // Flatten the data structure and add an id to GTS
     const gtsList = GTSLib.flattenGtsIdArray(this.innerResult.data as any[], 0).res;
 
+    console.log("inner options", this.innerOptions);
     // Set the series data
-    this.innerOptions.HCOptions.series = gtsList.map((gts, index) => {
-      return {
-        ...this.innerOptions.HCOptions?.series[index],
-        data: gts.v,
-        //if the name is not set, we set it to the default value this means also that the series does not have settings
-        name:
-          this.innerOptions.HCOptions?.series[index]?.name === `Series ${index}` || !this.innerOptions.HCOptions?.series[index]?.name
-            ? `NO NAMMED GTS ${index}`
-            : this.innerOptions.HCOptions.series[index].name,
-      };
-    });
+    if(this.innerOptions.HCOptions) {
+      this.innerOptions.HCOptions.series = gtsList.map((gts, index) => {
+        return {
+          ...this.innerOptions.HCOptions?.series[index],
+          data: gts.v,
+          //if the name is not set, we set it to the default value this means also that the series does not have settings
+          name:
+            this.innerOptions.HCOptions?.series[index]?.name === `Series ${index}` || !this.innerOptions.HCOptions?.series[index]?.name
+              ? `NO NAMMED GTS ${index}`
+              : this.innerOptions.HCOptions.series[index].name,
+        };
+      });
+      
+      // Make the chart
+      this.myChart = HighCharts.stockChart(this.chartElement, this.innerOptions.HCOptions as HighCharts.Options);
+    } else {
+      this.myChart = HighCharts.stockChart(this.chartElement, {});
+    }
 
-    // Make the chart
-    this.myChart = HighCharts.stockChart(this.chartElement, this.innerOptions.HCOptions as HighCharts.Options);
   }
 
   /************************************************************
@@ -164,7 +179,8 @@ export class HC {
    * Part of the lifecycle
    */
   componentDidLoad() {
-    setTimeout(() => this.drawChart());
+    console.log("Component did load");
+    //setTimeout(() => this.drawChart());
   }
 
   /*
