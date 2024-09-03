@@ -61,31 +61,33 @@ and then you can pass your Highcharts chart definition in the options field :
 
 - React
 ```tsx
-{
-    'title' 'Discovery - Highcharts'
-    'description' 'Discovery dashboard using Highcharts'
-    'tiles' [
-        {
-            'title' 'Highcharts graph'
-            'x' 0 'y' 0 'w' 12 'h' 3
-            'type' 'HC'
-            'options' {
-                'HCParams' `${Your Highcharts chart definition here}`
+<discovery-dashboard url="https://warpcloud.senx.io/api/v0/exec" dashboard-title="Discovery - Highcharts">
+    {`{
+        'title' 'Discovery - Highcharts'
+        'description' 'Discovery dashboard using Highcharts'
+        'tiles' [
+            {
+                'title' 'Highcharts graph'
+                'x' 0 'y' 0 'w' 12 'h' 3
+                'type' 'HC'
+                'options' {
+                    'HCParams' `${Your Highcharts chart definition here}`
+                }
+                'macro' <%
+                    1 4 <% DROP 
+                    NEWGTS 'g' STORE
+                    1 10 <% 
+                        'ts' STORE $g $ts RAND + STU * NOW + NaN NaN NaN RAND ADDVALUE DROP
+                    %> FOR
+                $g %> FOR STACKTOLIST 'data' STORE
+                { 
+                    'data' $data 
+                }
+                %>
             }
-            'macro' <%
-                1 4 <% DROP 
-                NEWGTS 'g' STORE
-                1 10 <% 
-                    'ts' STORE $g $ts RAND + STU * NOW + NaN NaN NaN RAND ADDVALUE DROP
-                %> FOR
-              $g %> FOR STACKTOLIST 'data' STORE
-              { 
-                'data' $data 
-              }
-            %>
-        }
-    ]
-}
+        ]
+    }`}
+</discovery-dashboard>
 ```
 
 ## Examples
