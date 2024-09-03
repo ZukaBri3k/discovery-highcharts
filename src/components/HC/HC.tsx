@@ -113,6 +113,7 @@ export class HC {
     let options = Utils.mergeDeep<HCParams>(this.innerOptions || ({} as HCParams), this.innerResult.globalParams) as HCParams;
     this.innerOptions = { ...options };
 
+    // If the HCParams is a string, we parse it
     if(typeof this.innerOptions.HCParams === 'string') {
       this.innerOptions.HCParams = JSON.parse(this.innerOptions.HCParams);
     }
