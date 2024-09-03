@@ -1,6 +1,6 @@
 {
   "name": "@_kwh50/discovery-highcharts",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": {
     "name": "Kyrill Dumerchat",
     "github": "https://github.com/ZukaBri3k",
@@ -14,15 +14,15 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/kwh50-discovery-highcharts/kwh50-discovery-highcharts.esm.js",
+  "unpkg": "dist/discovery-highcharts/discovery-highcharts.esm.js",
   "exports": {
     ".": {
-      "import": "./dist/kwh50-discovery-highcharts/kwh50-discovery-highcharts.esm.js",
-      "require": "./dist/kwh50-discovery-highcharts/kwh50-discovery-highcharts.cjs.js"
+      "import": "./dist/discovery-highcharts/discovery-highcharts.esm.js",
+      "require": "./dist/discovery-highcharts/discovery-highcharts.cjs.js"
     },
     "./my-component": {
-      "import": "./dist/components/kwh50-discovery-highcharts.js",
-      "types": "./dist/components/kwh50-discovery-highcharts.d.ts"
+      "import": "./dist/components/discovery-highcharts.js",
+      "types": "./dist/components/discovery-highcharts.d.ts"
     },
     "./loader": {
       "import": "./loader/index.js",
