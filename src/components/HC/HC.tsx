@@ -28,6 +28,7 @@ export class HC {
   @State() innerResult: DataModel; // will handle the parsed execution result
 
   private LOG: Logger; // The Discovery Logger
+  private divider: number = 1000;
   private chartElement: HTMLDivElement; // The chart area
   private innerStyles: any = {}; // Will handle custom CSS styles for your tile
   private myChart: HighCharts.StockChart; // The Highcharts instance
@@ -114,7 +115,7 @@ export class HC {
     this.innerOptions = { ...options };
 
     // If the HCParams is a string, we parse it
-    if(typeof this.innerOptions.HCParams === 'string') {
+    if (typeof this.innerOptions.HCParams === 'string') {
       this.innerOptions.HCParams = JSON.parse(this.innerOptions.HCParams);
     }
 
@@ -126,7 +127,7 @@ export class HC {
       this.innerOptions.HCParams.series = gtsList.map((gts, index) => {
         return {
           ...this.innerOptions.HCParams?.series[index],
-          data: gts.v,
+          data: gts.v.map((value: [number, number]) => [value[0] / this.divider, value[1]]), // we divide the timestamp by 1000 to convert it from μ seconds to milliseconds
           //if the name is not set, we set it to the default value this means also that the series does not have settings
           name:
             this.innerOptions.HCParams?.series[index]?.name === `Series ${index}` || !this.innerOptions.HCParams?.series[index]?.name
